@@ -41,7 +41,7 @@ class GameViewController: UIViewController {
    
     @IBAction func ToSelect(_ sender: UIButton) {
         let storyboard: UIStoryboard = UIStoryboard(name: "Select", bundle: nil)
-        let nextView = storyboard.instantiateViewController(withIdentifier: "next") as! SelectViewController
+        let nextView = storyboard.instantiateViewController(withIdentifier: "Select") as! SelectViewController
         self.present(nextView, animated: true, completion: nil)
     }
     

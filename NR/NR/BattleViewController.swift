@@ -1,5 +1,5 @@
 //
-//  SelectViewController.swift
+//  BattleViewController.swift
 //  NR
 //
 //  Created by Riku Uchida on 2017/08/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SelectViewController: UIViewController {
+class BattleViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,12 +22,6 @@ class SelectViewController: UIViewController {
     }
     
     //MARK: Action
-    
-    @IBAction func ToBattle(_ sender: UIButton) {
-        let storyboard: UIStoryboard = UIStoryboard(name: "Battle", bundle: nil)
-        let nextView = storyboard.instantiateViewController(withIdentifier: "Battle") as! BattleViewController
-        self.present(nextView, animated: true, completion: nil)
-    }
     
     
 

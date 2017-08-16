@@ -15,9 +15,10 @@
 		35F40D0D1F42FBA8001E395B /* NRTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F40D0C1F42FBA8001E395B /* NRTests.swift */; };
 		35F40D181F42FBA8001E395B /* NRUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F40D171F42FBA8001E395B /* NRUITests.swift */; };
 		3AED567B1F43DAD9007306C1 /* Select.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AED567A1F43DAD9007306C1 /* Select.storyboard */; };
-		3AED567D1F43DAEC007306C1 /* Fight.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AED567C1F43DAEC007306C1 /* Fight.storyboard */; };
+		3AED567D1F43DAEC007306C1 /* Battle.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AED567C1F43DAEC007306C1 /* Battle.storyboard */; };
 		3AED567F1F43DAFD007306C1 /* Result.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AED567E1F43DAFD007306C1 /* Result.storyboard */; };
 		3AED56871F440235007306C1 /* SelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AED56861F440235007306C1 /* SelectViewController.swift */; };
+		3AED56891F441551007306C1 /* BattleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AED56881F441551007306C1 /* BattleViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,9 +53,10 @@
 		35F40D171F42FBA8001E395B /* NRUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NRUITests.swift; sourceTree = "<group>"; };
 		35F40D191F42FBA8001E395B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3AED567A1F43DAD9007306C1 /* Select.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Select.storyboard; sourceTree = "<group>"; };
-		3AED567C1F43DAEC007306C1 /* Fight.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Fight.storyboard; sourceTree = "<group>"; };
+		3AED567C1F43DAEC007306C1 /* Battle.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Battle.storyboard; sourceTree = "<group>"; };
 		3AED567E1F43DAFD007306C1 /* Result.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Result.storyboard; sourceTree = "<group>"; };
 		3AED56861F440235007306C1 /* SelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectViewController.swift; sourceTree = "<group>"; };
+		3AED56881F441551007306C1 /* BattleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BattleViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,7 +112,8 @@
 				35F40CFB1F42FBA8001E395B /* Main.storyboard */,
 				3AED56861F440235007306C1 /* SelectViewController.swift */,
 				3AED567A1F43DAD9007306C1 /* Select.storyboard */,
-				3AED567C1F43DAEC007306C1 /* Fight.storyboard */,
+				3AED567C1F43DAEC007306C1 /* Battle.storyboard */,
+				3AED56881F441551007306C1 /* BattleViewController.swift */,
 				3AED567E1F43DAFD007306C1 /* Result.storyboard */,
 				35F40CFE1F42FBA8001E395B /* Assets.xcassets */,
 				35F40D001F42FBA8001E395B /* LaunchScreen.storyboard */,
@@ -248,7 +251,7 @@
 				35F40CFF1F42FBA8001E395B /* Assets.xcassets in Resources */,
 				35F40D021F42FBA8001E395B /* LaunchScreen.storyboard in Resources */,
 				3AED567B1F43DAD9007306C1 /* Select.storyboard in Resources */,
-				3AED567D1F43DAEC007306C1 /* Fight.storyboard in Resources */,
+				3AED567D1F43DAEC007306C1 /* Battle.storyboard in Resources */,
 				3AED567F1F43DAFD007306C1 /* Result.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,6 +278,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3AED56871F440235007306C1 /* SelectViewController.swift in Sources */,
+				3AED56891F441551007306C1 /* BattleViewController.swift in Sources */,
 				35F40CFA1F42FBA8001E395B /* GameViewController.swift in Sources */,
 				35F40CF21F42FBA8001E395B /* AppDelegate.swift in Sources */,
 			);
