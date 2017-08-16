@@ -9,23 +9,23 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Select View Controller-->
-        <scene sceneID="i2O-QR-KCv">
+        <!--Battle View Controller-->
+        <scene sceneID="dEi-Q7-KeU">
             <objects>
-                <viewController id="byO-Pp-pwA" customClass="SelectViewController" customModule="NR" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="KTI-OI-806" customClass="BattleViewController" customModule="NR" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="4ts-io-Tg6"/>
-                        <viewControllerLayoutGuide type="bottom" id="SvU-AC-yOL"/>
+                        <viewControllerLayoutGuide type="top" id="p4c-XB-P4r"/>
+                        <viewControllerLayoutGuide type="bottom" id="oRa-c3-WeR"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="WvK-3q-8Vr">
+                    <view key="view" contentMode="scaleToFill" id="Xjz-yB-byg">
                         <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="B5e-Ry-DB0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZpZ-Ah-mD1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-140" y="-62"/>
+            <point key="canvasLocation" x="292" y="98"/>
         </scene>
     </scenes>
 </document>
