@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
-    <device id="retina4_7" orientation="landscape">
+    <device id="retina4_0" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -9,18 +9,31 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Select View Controller-->
         <scene sceneID="i2O-QR-KCv">
             <objects>
-                <viewController id="byO-Pp-pwA" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Select" id="byO-Pp-pwA" customClass="SelectViewController" customModule="NR" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="4ts-io-Tg6"/>
                         <viewControllerLayoutGuide type="bottom" id="SvU-AC-yOL"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="WvK-3q-8Vr">
-                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="568" height="320"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aV1-F0-4Zd">
+                                <rect key="frame" x="261" y="145" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="ToBattle:" destination="byO-Pp-pwA" eventType="touchUpInside" id="HtO-Qu-Doq"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="aV1-F0-4Zd" firstAttribute="centerY" secondItem="WvK-3q-8Vr" secondAttribute="centerY" id="H5h-jh-lDm"/>
+                            <constraint firstItem="aV1-F0-4Zd" firstAttribute="centerX" secondItem="WvK-3q-8Vr" secondAttribute="centerX" id="TT5-ZK-vg2"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B5e-Ry-DB0" userLabel="First Responder" sceneMemberID="firstResponder"/>
