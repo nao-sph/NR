@@ -14,7 +14,7 @@ class GameViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         if let view = self.view as! SKView? {
             // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "GameScene") {
@@ -36,6 +36,15 @@ class GameViewController: UIViewController {
     override var shouldAutorotate: Bool {
         return true
     }
+    
+    //MARK: Action
+   
+    @IBAction func ToSelect(_ sender: UIButton) {
+        let storyboard: UIStoryboard = UIStoryboard(name: "Select", bundle: nil)
+        let nextView = storyboard.instantiateViewController(withIdentifier: "next") as! SelectViewController
+        self.present(nextView, animated: true, completion: nil)
+    }
+    
 
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         if UIDevice.current.userInterfaceIdiom == .phone {
