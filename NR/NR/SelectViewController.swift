@@ -7,13 +7,33 @@
 //
 
 import UIKit
+import Foundation
+import SocketIO
+
+let socket = SocketIOClient(socketURL: URL(string: "http://localhost:3000")!, config: [.forceWebsockets(true)])
+
+
 
 class SelectViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        socket.connect()
 
         // Do any additional setup after loading the view.
+        
+        //nameとcharaNumをemit"rm_accessで送る
+        let name = "hoge"
+        
+        socket.on("connect") { data, ack in
+            print("socket connected")
+            print("send message")
+            socket.emit("access", name)
+        }
+
+     
+        
+
     }
 
     override func didReceiveMemoryWarning() {
