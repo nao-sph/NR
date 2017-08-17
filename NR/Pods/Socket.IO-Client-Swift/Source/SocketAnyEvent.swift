@@ -1,8 +1,8 @@
 //
-//  EventHandler.swift
-//  Socket.IO-Swift
+//  SocketAnyEvent.swift
+//  Socket.IO-Client-Swift
 //
-//  Created by Erik Little on 1/18/15.
+//  Created by Erik Little on 3/28/15.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,29 +24,23 @@
 
 import Foundation
 
-public typealias NormalCallback = (NSArray?, AckEmitter?) -> Void
-public typealias AckEmitter = (AnyObject...) -> Void
+/// Represents some event that was received.
+public final class SocketAnyEvent : NSObject {
+    // MARK: Properties
 
-private func emitAckCallback(socket:SocketIOClient, num:Int)
-    // Curried
-    (items:AnyObject...) -> Void {
-        socket.emitAck(num, withData: items)
-}
+    /// The event name.
+    public let event: String
 
-class SocketEventHandler {
-    let event:String!
-    let callback:NormalCallback?
-    
-    init(event:String, callback:NormalCallback) {
-        self.event = event
-        self.callback = callback
+    /// The data items for this event.
+    public let items: [Any]?
+
+    /// The description of this event.
+    override public var description: String {
+        return "SocketAnyEvent: Event: \(event) items: \(String(describing: items))"
     }
-    
-    func executeCallback(_ items:NSArray? = nil, withAck ack:Int? = nil, withAckType type:Int? = nil,
-        withSocket socket:SocketIOClient? = nil) {
-            dispatch_async(dispatch_get_main_queue()) {[weak self] in
-                self?.callback?(items, ack != nil ? emitAckCallback(socket!, ack!) : nil)
-                return
-            }
+
+    init(event: String, items: [Any]?) {
+        self.event = event
+        self.items = items
     }
 }

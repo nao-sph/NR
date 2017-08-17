@@ -1,8 +1,8 @@
 //
-//  SocketAckMap.swift
-//  SocketIO-Swift
+//  SocketIOClientStatus.swift
+//  Socket.IO-Client-Swift
 //
-//  Created by Erik Little on 4/3/15.
+//  Created by Erik Little on 8/14/15.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -24,36 +24,17 @@
 
 import Foundation
 
-public typealias AckCallback = @objc_block (NSArray?) -> Void
-public typealias OnAckCallback = (timeout:UInt64, callback:AckCallback) -> Void
+/// Represents the state of the client.
+@objc public enum SocketIOClientStatus : Int {
+    /// The client has never been connected. Or the client has been reset.
+    case notConnected
 
-struct SocketAckMap {
-    private var acks = [Int: AckCallback]()
-    private var waiting = [Int: Bool]()
-    
-    mutating func addAck(ack:Int, callback:AckCallback) {
-        waiting[ack] = true
-        acks[ack] = callback
-    }
-    
-    mutating func executeAck(ack:Int, items:[AnyObject]?) {
-        let callback = acks[ack]
-        waiting[ack] = false
-        
-        dispatch_async(dispatch_get_main_queue()) {
-            callback?(items)
-            return
-        }
-        
-        acks.removeValueForKey(ack)
-    }
-    
-    mutating func timeoutAck(ack:Int) {
-        if waiting[ack] != nil && waiting[ack]! {
-            acks[ack]?(["NO ACK"])
-        }
-        
-        acks.removeValueForKey(ack)
-        waiting.removeValueForKey(ack)
-    }
+    /// The client was once connected, but not anymore.
+    case disconnected
+
+    /// The client is in the process of connecting.
+    case connecting
+
+    /// The client is currently connected.
+    case connected
 }

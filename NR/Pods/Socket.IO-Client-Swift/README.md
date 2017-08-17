@@ -1,64 +1,108 @@
-#Socket.IO-Client-Swift
+[![Build Status](https://travis-ci.org/socketio/socket.io-client-swift.svg?branch=master)](https://travis-ci.org/socketio/socket.io-client-swift)
+
+# Socket.IO-Client-Swift
 Socket.IO-client for iOS/OS X.
 
-##Example
+## Example
 ```swift
-let socket = SocketIOClient(socketURL: "localhost:8080")
+import SocketIO
 
-socket.on("connect") {data, ack in
-    println("socket connected")
+let socket = SocketIOClient(socketURL: URL(string: "http://localhost:8080")!, config: [.log(true), .compress])
+
+socket.on(clientEvent: .connect) {data, ack in
+    print("socket connected")
 }
 
 socket.on("currentAmount") {data, ack in
-    if let cur = data?[0] as? Double {
-        socket.emitWithAck("canUpdate", cur)(timeout: 0) {data in
+    if let cur = data[0] as? Double {
+        socket.emitWithAck("canUpdate", cur).timingOut(after: 0) {data in
             socket.emit("update", ["amount": cur + 2.50])
         }
 
-        ack?("Got your currentAmount", "dude")
+        ack.with("Got your currentAmount", "dude")
     }
 }
 
-// Connect
 socket.connect()
 ```
 
-##Objective-C Example
+## Objective-C Example
 ```objective-c
-SocketIOClient* socket = [[SocketIOClient alloc] initWithSocketURL:@"localhost:8080" options:nil];
+@import SocketIO;
+NSURL* url = [[NSURL alloc] initWithString:@"http://localhost:8080"];
+SocketIOClient* socket = [[SocketIOClient alloc] initWithSocketURL:url config:@{@"log": @YES, @"compress": @YES}];
 
-[socket on: @"connect" callback: ^(NSArray* data, void (^ack)(NSArray*)) {
-    NSLog(@"connected");
-    [socket emitObjc:@"echo" withItems:@[@"echo test"]];
-    [socket emitWithAckObjc:@"ackack" withItems:@[@1]](10, ^(NSArray* data) {
-        NSLog(@"Got ack");
-    });
+[socket on:@"connect" callback:^(NSArray* data, SocketAckEmitter* ack) {
+    NSLog(@"socket connected");
 }];
+
+[socket on:@"currentAmount" callback:^(NSArray* data, SocketAckEmitter* ack) {
+    double cur = [[data objectAtIndex:0] floatValue];
+
+    [[socket emitWithAck:@"canUpdate" with:@[@(cur)]] timingOutAfter:0 callback:^(NSArray* data) {
+        [socket emit:@"update" with:@[@{@"amount": @(cur + 2.50)}]];
+    }];
+
+    [ack with:@[@"Got your currentAmount, ", @"dude"]];
+}];
+
+[socket connect];
 
 ```
 
-##Features
-- Supports socket.io 1.0+
+## Features
+- Supports socket.io 2.0+ (For socket.io 1.0 use v9.x)
 - Supports binary
 - Supports Polling and WebSockets
 - Supports TLS/SSL
 - Can be used from Objective-C
 
-##Installation
-Manually (iOS 7+)
------------------
-1. Copy the SwiftIO folder into your Xcode project!
+## Installation
+Requires Swift 3/Xcode 8.x
 
-CocoaPods 0.36.0 or later (iOS 8+)
-------------------
+If you need swift 2.3 use the swift2.3 tag (Pre-Swift 3 support is no longer maintained)
+
+If you need swift 2.2 use 7.x (Pre-Swift 3 support is no longer maintained)
+
+If you need Swift 2.1 use v5.5.0 (Pre-Swift 2.2 support is no longer maintained)
+
+If you need Swift 1.2 use v2.4.5 (Pre-Swift 2 support is no longer maintained)
+
+If you need Swift 1.1 use v1.5.2. (Pre-Swift 1.2 support is no longer maintained)
+
+### Swift Package Manager
+Add the project as a dependency to your Package.swift:
+```swift
+import PackageDescription
+
+let package = Package(
+    name: "YourSocketIOProject",
+    dependencies: [
+        .Package(url: "https://github.com/socketio/socket.io-client-swift", majorVersion: 11)
+    ]
+)
+```
+
+Then import `import SocketIO`.
+
+### Carthage
+Add these line to your `Cartfile`:
+```
+github "nuclearace/Starscream" ~> 8.0.2
+github "socketio/socket.io-client-swift" ~> 11.0.2 # Or latest version
+```
+
+Run `carthage update --platform ios,macosx`.
+
+### CocoaPods 1.0.0 or later
 Create `Podfile` and add `pod 'Socket.IO-Client-Swift'`:
 
 ```ruby
-source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
 use_frameworks!
 
-pod 'Socket.IO-Client-Swift', '~> 1.3.2' # Or latest version
+target 'YourApp' do
+    pod 'Socket.IO-Client-Swift', '~> 11.0.2' # Or latest version
+end
 ```
 
 Install pods:
@@ -67,51 +111,40 @@ Install pods:
 $ pod install
 ```
 
-Import in your swift file:
+Import the module:
 
+Swift:
 ```swift
-import Socket_IO_Client_Swift
+import SocketIO
 ```
 
-##API
-Constructors
------------
-`init(socketURL: String, opts:NSDictionary? = nil)` - Constructs a new client for the given URL. opts can be omitted (will use default values)
+Objective-C:
 
-`convenience init(socketURL: String, options:NSDictionary?)` - Same as above, but meant for Objective-C. See Objective-C Example.
+```Objective-C
+@import SocketIO;
+```
 
-Options
--------
-- `reconnects: Bool` Default is `true`
-- `reconnectAttempts: Int` Default is `-1` (infinite tries)
-- `reconnectWait: Int` Default is `10`
-- `forcePolling: Bool` Default is `false`. `true` forces the client to use xhr-polling.
-- `forceWebsockets: Bool` Default is `false`. `true` forces the client to use WebSockets.
-- `nsp: String` Default is `"/"`
-- `cookies: [NSHTTPCookie]?` An array of NSHTTPCookies. Passed during the handshake. Default is nil.
+### CocoaSeeds
 
-Methods
--------
-1. `on(name:String, callback:((data:NSArray?, ack:AckEmitter?) -> Void))` - Adds a handler for an event. Items are passed by an array. `ack` can be used to send an ack when one is requested. See example.
-2. `onAny(callback:((event:String, items:AnyObject?)) -> Void)` - Adds a handler for all events. It will be called on any received event.
-3. `emit(event:String, _ items:AnyObject...)` - Sends a message. Can send multiple items.
-4. `emitObjc(event:String, withItems items:[AnyObject])` - `emit` for Objective-C
-5. `emitWithAck(event:String, _ items:AnyObject...) -> (timeout:UInt64, callback:(NSArray?) -> Void) -> Void` - Sends a message that requests an acknowledgement from the server. Returns a function which you can use to add a handler. See example. Note: The message is not sent until you call the returned function.
-6. `emitWithAckObjc(event:String, withItems items:[AnyObject]) -> (UInt64, (NSArray?) -> Void) -> Void` - `emitWithAck` for Objective-C. Note: The message is not sent until you call the returned function.
-7. `connect()` - Establishes a connection to the server. A "connect" event is fired upon successful connection.
-8. `connectWithParams(params:[String: AnyObject])` - Establishes a connection to the server passing the specified params. A "connect" event is fired upon successful connection.
-9. `close(#fast:Bool)` - Closes the socket. Once a socket is closed it should not be reopened. Pass true to fast if you're closing from a background task.
+Add this line to your `Seedfile`:
 
-Events
-------
-1. `connect` - Emitted when on a successful connection.
-2. `disconnect` - Emitted when the connection is closed.
-3. `error` - Emitted if the websocket encounters an error.
-4. `reconnect` - Emitted when the connection is starting to reconnect.
-5. `reconnectAttempt` - Emitted when attempting to reconnect.
+```
+github "socketio/socket.io-client-swift", "v11.0.2", :files => "Source/*.swift" # Or latest version
+```
 
-##Detailed Example
+Run `seed install`.
+
+
+# [Docs](https://nuclearace.github.io/Socket.IO-Client-Swift/index.html)
+
+- [Client](https://nuclearace.github.io/Socket.IO-Client-Swift/Classes/SocketIOClient.html)
+- [Engine](https://nuclearace.github.io/Socket.IO-Client-Swift/Classes/SocketEngine.html)
+- [Options](https://nuclearace.github.io/Socket.IO-Client-Swift/Enums/SocketIOClientOption.html)
+
+## Detailed Example
 A more detailed example can be found [here](https://github.com/nuclearace/socket.io-client-swift-example)
 
-##License
+An example using the Swift Package Manager can be found [here](https://github.com/nuclearace/socket.io-client-swift-spm-example)
+
+## License
 MIT

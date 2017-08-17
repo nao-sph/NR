@@ -1,8 +1,8 @@
 //
-//  SocketAnyEvent.swift
-//  Socket.IO-Swift
+//  SocketEngineClient.swift
+//  Socket.IO-Client-Swift
 //
-//  Created by Erik Little on 3/28/15.
+//  Created by Erik Little on 3/19/15.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -21,15 +21,36 @@
 //  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 //  THE SOFTWARE.
+//
 
 import Foundation
 
-@objc public class SocketAnyEvent {
-    public let event:String!
-    public var items:[AnyObject]?
-    
-    init(event:String, items:[AnyObject]?) {
-        self.event = event
-        self.items = items
-    }
+/// Declares that a type will be a delegate to an engine.
+@objc public protocol SocketEngineClient {
+    // MARK: Methods
+
+    /// Called when the engine errors.
+    ///
+    /// - parameter reason: The reason the engine errored.
+    func engineDidError(reason: String)
+
+    /// Called when the engine closes.
+    ///
+    /// - parameter reason: The reason that the engine closed.
+    func engineDidClose(reason: String)
+
+    /// Called when the engine opens.
+    ///
+    /// - parameter reason: The reason the engine opened.
+    func engineDidOpen(reason: String)
+
+    /// Called when the engine has a message that must be parsed.
+    ///
+    /// - parameter msg: The message that needs parsing.
+    func parseEngineMessage(_ msg: String)
+
+    /// Called when the engine receives binary data.
+    ///
+    /// - parameter data: The data the engine received.
+    func parseEngineBinaryData(_ data: Data)
 }

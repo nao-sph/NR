@@ -1,8 +1,8 @@
 //
-//  SocketEngineClient.swift
-//  Socket.IO-Swift
+//  SocketEnginePacketType.swift
+//  Socket.IO-Client-Swift
 //
-//  Created by Erik Little on 3/19/15.
+//  Created by Erik Little on 10/7/15.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,17 +25,26 @@
 
 import Foundation
 
-@objc public protocol SocketEngineClient {
-    var handleQueue:dispatch_queue_attr_t! {get}
-    var emitQueue:dispatch_queue_attr_t! {get}
-    var reconnecting:Bool {get}
-    var socketURL:String {get}
-    var secure:Bool {get}
-    
-    func didForceClose(reason:String)
-    func parseSocketMessage(msg:String)
-    func parseBinaryData(data:NSData)
-    func pollingDidFail(err:String)
-    func webSocketDidCloseWithCode(code:Int, reason:String)
-    func webSocketDidFailWithError(error:NSError)
+/// Represents the type of engine.io packet types.
+@objc public enum SocketEnginePacketType : Int {
+    /// Open message.
+    case open
+
+    /// Close message.
+    case close
+
+    /// Ping message.
+    case ping
+
+    /// Pong message.
+    case pong
+
+    /// Regular message.
+    case message
+
+    /// Upgrade message.
+    case upgrade
+
+    /// NOOP.
+    case noop
 }
