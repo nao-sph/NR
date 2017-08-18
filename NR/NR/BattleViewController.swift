@@ -13,6 +13,15 @@ import Foundation
 
 class BattleViewController : SelectViewController {
     
+    //HPの処理
+   
+    @IBOutlet weak var HP1: UIProgressView!
+    @IBOutlet weak var HP2: UIProgressView!
+    
+    @IBAction func Damage(decrease: Float){
+        HP1.setProgress(HP1.progress - decrease, animated: true)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,8 +35,11 @@ class BattleViewController : SelectViewController {
         //            // self.socket.emit("access", name)
         //        }
         
+        
+        //socket受信した時の処理
         socket.on("in_ok1") { data, ack in
             print("attackedddddddddddddd")
+            self.Damage(decrease: 0.1)
             //print("send message2")
             // self.socket.emit("access", name)
         }
@@ -38,6 +50,7 @@ class BattleViewController : SelectViewController {
         }
         
         //体力バー
+        
     
 }
 
