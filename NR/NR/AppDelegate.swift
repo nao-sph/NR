@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         //socket使用しまーす
-        socket = SocketIOClient(socketURL: URL(string: "http://localhost:3000")!, config: [.forceWebsockets(true)])
+        socket = SocketIOClient(socketURL: URL(string: "https://nrserver.herokuapp.com")!, config: [.forceWebsockets(true)])
         
         
         socket.on("disconnect") { data, ack in
