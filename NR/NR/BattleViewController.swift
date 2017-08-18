@@ -26,7 +26,17 @@ class BattleViewController : SelectViewController {
         //            // self.socket.emit("access", name)
         //        }
         
-        
+        socket.on("in_ok1") { data, ack in
+            print("attackedddddddddddddd")
+            //print("send message2")
+            // self.socket.emit("access", name)
+        }
+        socket.on("in_ok") { data, ack in
+            print("magicccccccccccccccccc")
+            //print("send message2")
+            // self.socket.emit("access", name)
+        }
+
         
     }
     
@@ -44,14 +54,19 @@ class BattleViewController : SelectViewController {
         socket = appDelegate.socket
         
         socket.emit("in_socket1")
-        socket.on("in_ok1") { data, ack in
-            print("outtttttttttt")
-            //print("send message2")
-            // self.socket.emit("access", name)
-        }
-        print("attacked")
+//        print("attacked")
         
     }
+    
+    @IBAction func magic(_ sender: UIButton) {
+        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        socket = appDelegate.socket
+        
+        socket.emit("in_socket")
+//        print("magic")
+        
+    }
+    
     
     /*
      // MARK: - Navigation

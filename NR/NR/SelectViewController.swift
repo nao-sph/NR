@@ -19,6 +19,8 @@ class SelectViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        socket = appDelegate.socket
         
 //        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
 //        socket = appDelegate.socket
