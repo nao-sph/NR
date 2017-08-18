@@ -10,8 +10,8 @@ import UIKit
 import SocketIO
 import Foundation
 
+
 class BattleViewController : SelectViewController {
-    
     
     
     override func viewDidLoad() {
@@ -36,46 +36,47 @@ class BattleViewController : SelectViewController {
             //print("send message2")
             // self.socket.emit("access", name)
         }
+        
+        //体力バー
+    
+}
 
-        
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    //MARK: Action
+override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+    // Dispose of any resources that can be recreated.
+}
 
+//MARK: Action
+
+
+@IBAction func attack(_ sender: UIButton) {
     
-    @IBAction func attack(_ sender: UIButton) {
-        
-        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        socket = appDelegate.socket
-        
-        socket.emit("in_socket1")
-//        print("attacked")
-        
-    }
+    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+    socket = appDelegate.socket
     
-    @IBAction func magic(_ sender: UIButton) {
-        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        socket = appDelegate.socket
-        
-        socket.emit("in_socket")
-//        print("magic")
-        
-    }
+    socket.emit("in_socket1")
+    //        print("attacked")
     
+}
+
+@IBAction func magic(_ sender: UIButton) {
+    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+    socket = appDelegate.socket
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
-     }
-     */
+    socket.emit("in_socket")
+    //        print("magic")
     
+}
+
+
+/*
+ // MARK: - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+ // Get the new view controller using segue.destinationViewController.
+ // Pass the selected object to the new view controller.
+ }
+ */
+
 }

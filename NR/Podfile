@@ -5,6 +5,7 @@ target 'NR' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
   pod 'Socket.IO-Client-Swift', '~> 11.0.2' # Or latest version
+  #pod 'ColorGaugeView', :git => 'https://github.com/akihiro0228/ColorGaugeView.git'
 
   # Pods for NR
 
