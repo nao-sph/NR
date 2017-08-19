@@ -44,8 +44,9 @@ class BattleViewController : SelectViewController {
         //socket受信した時の処理
         socket.on("to_everyone") { data, ack in
             
-            let _data: NSDictionary = data[0] as! NSDictionary
-            var str : NSString = _data[@"Key1"]
+//            let _data: NSDictionary = data[0] as! NSDictionary
+//            var str : NSString = _data[@"Key1"]
+            let Cmd: Int = data[0] as! Int
             
             
 //            let Num: Data = items.data(using: String.Encoding.utf8)!
@@ -138,13 +139,12 @@ class BattleViewController : SelectViewController {
         buttonDisable()
         BUTTON.showsTouchWhenHighlighted = true
     }
-    
+    // "@{@\"Key1\": @\"Value1\", @\"Key2\": @\"2\", @\"Key3\": @{@\"valueinkey1\": @\"value\", @\"valueinkey2\": @\"3\"}};"
+
     
     @IBAction func attack(_ sender: UIButton) {
         buttonBasics(BUTTON: sender)
-        socket.emit("req_to_everyone",
-                    "@{@\"Key1\": @\"Value1\", @\"Key2\": @\"2\", @\"Key3\": @{@\"valueinkey1\": @\"value\", @\"valueinkey2\": @\"3\"}};"
-        )
+        socket.emit("req_to_everyone",1)
         
     }
     @IBAction func magic(_ sender: UIButton) {
