@@ -23,11 +23,11 @@ class BattleViewController : SelectViewController {
     @IBAction func Damage(decrease: Float){
         HP2.setProgress(HP2.progress - decrease, animated: true)
     }
-    @IBAction func cure(decrease: Float){
-        HP1.setProgress(HP1.progress + decrease, animated: true)
+    @IBAction func cure(increase: Float){
+        HP1.setProgress(HP1.progress + increase, animated: true)
     }
-    @IBAction func MPdamage(increase: Float){
-        MP1.setProgress(MP1.progress - increase, animated: true)
+    @IBAction func MPdamage(decrease: Float){
+        MP1.setProgress(MP1.progress - decrease, animated: true)
     }
     
     
