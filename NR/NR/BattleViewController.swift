@@ -43,7 +43,32 @@ class BattleViewController : SelectViewController {
         
         //socket受信した時の処理
         socket.on("to_everyone") { data, ack in
-            let Cmd = data[0] as! Int
+            
+//            let Cmd: int = data[0] as! Int
+            
+            
+//            let Num: Data = items.data(using: String.Encoding.utf8)!
+            
+//            do {
+//                let json = try JSONSerialization.jsonObject(with: items, options: JSONSerialization.ReadingOptions.allowFragments) // JSONパース。optionsは型推論可(".allowFragmets"等)
+//                let top = json as! NSArray // トップレベルが配列
+//                for roop in top {
+//                    let next = roop as! NSDictionary
+//                    //print(next["id"] as! String) // 1, 2 が表示
+//                    
+//                    let content = next["content"] as! NSDictionary
+//                    print(content["data"] as! Int) // 25, 20 が表示
+//                }
+//            } catch {
+//                print(error) // パースに失敗したときにエラーを表示
+//            }
+            
+//            if let Cmd = data as? [[String: AnyObject]]{
+//                if let txt = Cmd[0] as? String {
+//                    print(txt)
+//                    print("test")
+//                }
+//            }
             
             switch Cmd {
             case 1:
@@ -113,9 +138,12 @@ class BattleViewController : SelectViewController {
         BUTTON.showsTouchWhenHighlighted = true
     }
     
+    
     @IBAction func attack(_ sender: UIButton) {
         buttonBasics(BUTTON: sender)
-        socket.emit("req_to_everyone",1)
+        socket.emit("req_to_everyone",
+                    @¥{¥"Key1¥": @¥"Value1¥",@¥"Key2¥": @¥"Value2¥",@¥"Key3¥": @¥"Value3¥"¥}
+        )
         
     }
     @IBAction func magic(_ sender: UIButton) {
