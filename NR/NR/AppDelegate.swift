@@ -37,8 +37,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     self.socket.emit("in_socket","hoge")
                 }
                 self.socket.connect()
+                self.socket.emit("rm_access",0)
                 self.isConnected = true
             }
+        }
+        socket.on("rm_full"){data, ack in
+            print(data[0])
+            print("rmfulldayo")
         }
         
         
