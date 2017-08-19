@@ -165,11 +165,13 @@ class BattleViewController : SelectViewController {
     @IBAction func magic(_ sender: UIButton) {
         buttonBasics(BUTTON: sender)
         socket.emit("req_to_room_without_self",2)
+        MPdamageForLocal(decrease: 0.2)
         
     }
     @IBAction func barrier(_ sender: UIButton) {
         buttonBasics(BUTTON: sender)
         socket.emit("req_to_room_without_self",3)
+        cure(increase: 1)
     }
     
     @IBAction func charge(_ sender: UIButton) {
