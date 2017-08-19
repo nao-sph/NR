@@ -44,7 +44,8 @@ class BattleViewController : SelectViewController {
         //socket受信した時の処理
         socket.on("to_everyone") { data, ack in
             
-//            let Cmd: int = data[0] as! Int
+            let _data: NSDictionary = data[0] as! NSDictionary
+            var str : NSString = _data[@"Key1"]
             
             
 //            let Num: Data = items.data(using: String.Encoding.utf8)!
@@ -55,7 +56,7 @@ class BattleViewController : SelectViewController {
 //                for roop in top {
 //                    let next = roop as! NSDictionary
 //                    //print(next["id"] as! String) // 1, 2 が表示
-//                    
+//
 //                    let content = next["content"] as! NSDictionary
 //                    print(content["data"] as! Int) // 25, 20 が表示
 //                }
@@ -142,7 +143,7 @@ class BattleViewController : SelectViewController {
     @IBAction func attack(_ sender: UIButton) {
         buttonBasics(BUTTON: sender)
         socket.emit("req_to_everyone",
-                    @¥{¥"Key1¥": @¥"Value1¥",@¥"Key2¥": @¥"Value2¥",@¥"Key3¥": @¥"Value3¥"¥}
+                    "@{@\"Key1\": @\"Value1\", @\"Key2\": @\"2\", @\"Key3\": @{@\"valueinkey1\": @\"value\", @\"valueinkey2\": @\"3\"}};"
         )
         
     }
