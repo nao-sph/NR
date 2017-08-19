@@ -50,6 +50,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.40000000600000002" green="1" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="チャージ"/>
+                                <connections>
+                                    <action selector="charge:" destination="PhX-le-aEa" eventType="touchUpInside" id="Abq-1O-Iz0"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TdP-0Z-tx7">
                                 <rect key="frame" x="139" y="198" width="111" height="47"/>
@@ -60,20 +63,14 @@
                                     <action selector="magic:" destination="PhX-le-aEa" eventType="touchUpInside" id="GzB-ky-Oe4"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gR5-hs-Dhz">
-                                <rect key="frame" x="20" y="198" width="111" height="47"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" title="攻撃"/>
-                                <connections>
-                                    <action selector="attack:" destination="PhX-le-aEa" eventType="touchUpInside" id="rhn-29-hgl"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="erl-Rk-CAM">
                                 <rect key="frame" x="20" y="253" width="111" height="47"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="バリア"/>
+                                <connections>
+                                    <action selector="barrier:" destination="PhX-le-aEa" eventType="touchUpInside" id="GID-qs-3c9"/>
+                                </connections>
                             </button>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" restorationIdentifier="hp1" progressViewStyle="bar" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="cw8-Ho-Szh">
                                 <rect key="frame" x="20" y="19.5" width="230" height="2.5"/>
@@ -87,29 +84,48 @@
                                 <color key="progressTintColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                 <color key="trackTintColor" red="1" green="0.35098305639999999" blue="0.4480536417" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </progressView>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" restorationIdentifier="hp2" progressViewStyle="bar" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="yaY-OD-uDR">
-                                <rect key="frame" x="318" y="19" width="230" height="2.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <color key="progressTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="trackTintColor" red="1" green="0.35098305639999999" blue="0.4480536417" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </progressView>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" restorationIdentifier="mp2" progressViewStyle="bar" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="qQN-2P-rvb" userLabel="MP2">
                                 <rect key="frame" x="318" y="28" width="230" height="2.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="progressTintColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                 <color key="trackTintColor" red="1" green="0.35098305639999999" blue="0.4480536417" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </progressView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" restorationIdentifier="hp2" progressViewStyle="bar" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="yaY-OD-uDR">
+                                <rect key="frame" x="318" y="19" width="230" height="2.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <color key="progressTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="trackTintColor" red="1" green="0.35098305639999999" blue="0.4480536417" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </progressView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" restorationIdentifier="atk1" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gR5-hs-Dhz">
+                                <rect key="frame" x="20" y="198" width="111" height="47"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.80000001190000003" blue="0.40000000600000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="攻撃"/>
+                                <connections>
+                                    <action selector="attack:" destination="PhX-le-aEa" eventType="touchUpInside" id="I3a-D7-mLW"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
+                        <outlet property="EnemyAttackButton" destination="8Kp-lK-jtC" id="3nh-qr-Ivq"/>
+                        <outlet property="EnemyBarrierButton" destination="IQ3-Sk-u84" id="ehu-7I-gIZ"/>
+                        <outlet property="EnemyChargeButton" destination="BF3-kK-jpr" id="1FV-r0-3fQ"/>
+                        <outlet property="EnemyMagicButton" destination="Fog-oI-juP" id="fD3-Xr-Kg0"/>
                         <outlet property="HP1" destination="cw8-Ho-Szh" id="9e7-z3-43f"/>
                         <outlet property="HP2" destination="yaY-OD-uDR" id="YMG-0R-Jxw"/>
+                        <outlet property="MP1" destination="ae3-p7-Btp" id="14I-yQ-c4s"/>
+                        <outlet property="MP2" destination="qQN-2P-rvb" id="28a-8M-nPX"/>
+                        <outlet property="attackButton" destination="gR5-hs-Dhz" id="BXl-P1-lih"/>
+                        <outlet property="barrierButton" destination="erl-Rk-CAM" id="EaR-r6-JFS"/>
+                        <outlet property="chargeButton" destination="tcj-X2-iss" id="j9c-a4-GQg"/>
+                        <outlet property="magicButton" destination="TdP-0Z-tx7" id="mUR-Sf-a7x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pbZ-Np-YyX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-121" y="-1478"/>
+            <point key="canvasLocation" x="-123" y="-1472"/>
         </scene>
     </scenes>
 </document>
