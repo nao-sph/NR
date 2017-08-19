@@ -13,13 +13,18 @@ import Foundation
 
 class BattleViewController : SelectViewController {
     
-    //HPの処理
-   
+    //HP,MPの処理
+    
     @IBOutlet weak var HP1: UIProgressView!
     @IBOutlet weak var HP2: UIProgressView!
+    @IBOutlet weak var MP1: UIProgressView!
+    @IBOutlet weak var MP2: UIProgressView!
     
     @IBAction func Damage(decrease: Float){
-        HP1.setProgress(HP1.progress - decrease, animated: true)
+        HP2.setProgress(HP2.progress - decrease, animated: true)
+    }
+    @IBAction func MPdamage(decrease: Float){
+        MP1.setProgress(MP1.progress - decrease, animated: true)
     }
     
     
@@ -37,59 +42,106 @@ class BattleViewController : SelectViewController {
         
         
         //socket受信した時の処理
-        socket.on("in_ok1") { data, ack in
-            print("attackedddddddddddddd")
-            self.Damage(decrease: 0.1)
-            //print("send message2")
-            // self.socket.emit("access", name)
+        socket.on("to_everyone") { data, ack in
+            let Cmd = data[0] as! Int
+            
+            switch Cmd {
+            case 1:
+                print("attackkkkkkkkkkkkkkkkkkkkk")
+                self.Damage(decrease: 0.1)
+                break
+            case 2:
+                print("magiiiiiiiicccccccccccccccc")
+                break
+            case 3:
+                print("barrrrrrrrrrrrrrrrrrrrierrrr")
+                break
+            case 4:
+                print("chaaaaaaaaaarrrrrrrgeeeeeeee")
+                self.MPdamage(decrease: -0.2)
+                break
+            default:
+                print("nothinggggggggggggggggggggg")
+            }
+            self.buttonEnable()
+            
         }
-        socket.on("in_ok") { data, ack in
-            print("magicccccccccccccccccc")
-            //print("send message2")
-            // self.socket.emit("access", name)
+        socket.on("to_self") { data, ack in
+            print("magiccccccccccccccccccc")
+            self.buttonEnable()
         }
         
         //体力バー
         
+        
+    }
     
-}
-
-override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-}
-
-//MARK: Action
-
-
-@IBAction func attack(_ sender: UIButton) {
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    @IBOutlet weak var attackButton: UIButton!
+    @IBOutlet weak var magicButton: UIButton!
+    @IBOutlet weak var barrierButton: UIButton!
+    @IBOutlet weak var chargeButton: UIButton!
+    @IBOutlet weak var EnemyAttackButton: UIButton!
+    @IBOutlet weak var EnemyMagicButton: UIButton!
+    @IBOutlet weak var EnemyBarrierButton: UIButton!
+    @IBOutlet weak var EnemyChargeButton: UIButton!
     
-    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-    socket = appDelegate.socket
     
-    socket.emit("in_socket1")
-    //        print("attacked")
+    //MARK: Action
     
-}
-
-@IBAction func magic(_ sender: UIButton) {
-    let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-    socket = appDelegate.socket
     
-    socket.emit("in_socket")
-    //        print("magic")
+    func buttonDisable(){
+        attackButton.isEnabled = false
+        magicButton.isEnabled = false
+        barrierButton.isEnabled = false
+        chargeButton.isEnabled = false
+    }
+    func buttonEnable() {
+        attackButton.isEnabled = true
+        magicButton.isEnabled = true
+        barrierButton.isEnabled = true
+        chargeButton.isEnabled = true
+    }
+    func buttonBasics(BUTTON: UIButton){
+        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        socket = appDelegate.socket
+        //buttons Disable until enemy selects cmd
+        buttonDisable()
+        BUTTON.showsTouchWhenHighlighted = true
+    }
     
-}
-
-
-/*
- // MARK: - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
- // Get the new view controller using segue.destinationViewController.
- // Pass the selected object to the new view controller.
- }
- */
-
+    @IBAction func attack(_ sender: UIButton) {
+        buttonBasics(BUTTON: sender)
+        socket.emit("req_to_everyone",1)
+        
+    }
+    @IBAction func magic(_ sender: UIButton) {
+        buttonBasics(BUTTON: sender)
+        socket.emit("req_to_everyone",2)
+        MPdamage(decrease: 0.2)
+        
+    }
+    @IBAction func barrier(_ sender: UIButton) {
+        buttonBasics(BUTTON: sender)
+        socket.emit("req_to_everyone",3)
+    }
+    
+    @IBAction func charge(_ sender: UIButton) {
+        buttonBasics(BUTTON: sender)
+        socket.emit("req_to_everyone",4)
+    }
+    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
