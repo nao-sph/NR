@@ -33,11 +33,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             DispatchQueue.main.asyncAfter(deadline: .now()+0.5){
                 self.socket.on("connect") { data, ack in
                     print("socket connected")
-                    //          self.socket.emit("access", name)
-                    self.socket.emit("in_socket","hoge")
+                    print("yo")
+                    self.socket.emit("rm_access",0)
                 }
                 self.socket.connect()
-                self.socket.emit("rm_access",0)
                 self.isConnected = true
             }
         }

@@ -97,10 +97,10 @@ class BattleViewController : SelectViewController {
             self.buttonEnable()
             
         }
-        socket.on("to_self") { data, ack in
-            print("magiccccccccccccccccccc")
-            self.buttonEnable()
-        }
+//        socket.on("to_self") { data, ack in
+//            print("magiccccccccccccccccccc")
+//            self.buttonEnable()
+//        }
         
         //体力バー
         
@@ -160,6 +160,7 @@ class BattleViewController : SelectViewController {
     @IBAction func barrier(_ sender: UIButton) {
         buttonBasics(BUTTON: sender)
         socket.emit("req_to_everyone",3)
+        Damage(decrease: -1)
     }
     
     @IBAction func charge(_ sender: UIButton) {
