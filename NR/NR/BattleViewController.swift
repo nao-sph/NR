@@ -23,8 +23,11 @@ class BattleViewController : SelectViewController {
     @IBAction func Damage(decrease: Float){
         HP2.setProgress(HP2.progress - decrease, animated: true)
     }
-    @IBAction func MPdamage(decrease: Float){
-        MP1.setProgress(MP1.progress - decrease, animated: true)
+    @IBAction func cure(decrease: Float){
+        HP1.setProgress(HP1.progress + decrease, animated: true)
+    }
+    @IBAction func MPdamage(increase: Float){
+        MP1.setProgress(MP1.progress - increase, animated: true)
     }
     
     
@@ -75,17 +78,18 @@ class BattleViewController : SelectViewController {
             switch Cmd {
             case 1:
                 print("attackkkkkkkkkkkkkkkkkkkkk")
-                self.Damage(decrease: 0.1)
+                self.Damage(decrease: 0.25)
                 break
             case 2:
                 print("magiiiiiiiicccccccccccccccc")
+                self.Damage(decrease: 0.35)
                 break
             case 3:
                 print("barrrrrrrrrrrrrrrrrrrrierrrr")
+                self.Damage(decrease: 0.1)
                 break
             case 4:
                 print("chaaaaaaaaaarrrrrrrgeeeeeeee")
-                self.MPdamage(decrease: -0.2)
                 break
             default:
                 print("nothinggggggggggggggggggggg")
@@ -161,6 +165,9 @@ class BattleViewController : SelectViewController {
     @IBAction func charge(_ sender: UIButton) {
         buttonBasics(BUTTON: sender)
         socket.emit("req_to_everyone",4)
+        MPdamage(decrease: -0.25)
+        cure(increase: 0.2)
+        
     }
     
     /*
