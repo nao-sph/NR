@@ -23,14 +23,14 @@ class BattleViewController : SelectViewController {
     @IBAction func Damage(decrease: Float){
         HP1.setProgress(HP1.progress - decrease, animated: true)
     }
+    @IBAction func Damage2p(decrease: Float){
+        HP2.setProgress(HP2.progress - decrease, animated: true)
+    }
     @IBAction func cure(increase: Float){
         HP2.setProgress(HP2.progress + increase, animated: true)
     }
     @IBAction func MPdamage(decrease: Float){
         MP2.setProgress(MP2.progress - decrease, animated: true)
-    }
-    @IBAction func cureForLocal(increase: Float){
-        HP1.setProgress(HP1.progress + increase, animated: true)
     }
     @IBAction func MPdamageForLocal(decrease: Float){
         MP1.setProgress(MP1.progress - decrease, animated: true)
@@ -160,11 +160,13 @@ class BattleViewController : SelectViewController {
     @IBAction func attack(_ sender: UIButton) {
         buttonBasics(BUTTON: sender)
         socket.emit("req_to_room_without_self",1)
+        Damage2p(decrease: 0.25)
         
     }
     @IBAction func magic(_ sender: UIButton) {
         buttonBasics(BUTTON: sender)
         socket.emit("req_to_room_without_self",2)
+        Damage2p(decrease: 0.35)
         MPdamageForLocal(decrease: 0.2)
         
     }
@@ -178,7 +180,7 @@ class BattleViewController : SelectViewController {
         buttonBasics(BUTTON: sender)
         socket.emit("req_to_room_without_self",4)
         self.MPdamageForLocal(decrease: -0.25)
-        self.cureForLocal(increase: 0.2)
+        self.Damage(decrease: -0.2)
         
     }
     
