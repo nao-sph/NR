@@ -77,14 +77,26 @@
                             </button>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" restorationIdentifier="hp1" progressViewStyle="bar" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="cw8-Ho-Szh">
                                 <rect key="frame" x="20" y="19.5" width="230" height="2.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="progressTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="trackTintColor" red="1" green="0.35098305639999999" blue="0.4480536417" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </progressView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" restorationIdentifier="mp1" progressViewStyle="bar" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="ae3-p7-Btp" userLabel="MP1">
+                                <rect key="frame" x="20" y="28" width="230" height="2.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <color key="progressTintColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                 <color key="trackTintColor" red="1" green="0.35098305639999999" blue="0.4480536417" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </progressView>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" restorationIdentifier="hp2" progressViewStyle="bar" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="yaY-OD-uDR">
                                 <rect key="frame" x="318" y="19" width="230" height="2.5"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="progressTintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="trackTintColor" red="1" green="0.35098305639999999" blue="0.4480536417" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </progressView>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" restorationIdentifier="mp2" progressViewStyle="bar" progress="1" translatesAutoresizingMaskIntoConstraints="NO" id="qQN-2P-rvb" userLabel="MP2">
+                                <rect key="frame" x="318" y="28" width="230" height="2.5"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <color key="progressTintColor" name="alternateSelectedControlColor" catalog="System" colorSpace="catalog"/>
                                 <color key="trackTintColor" red="1" green="0.35098305639999999" blue="0.4480536417" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </progressView>
                         </subviews>
@@ -97,7 +109,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pbZ-Np-YyX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-7" y="-1324"/>
+            <point key="canvasLocation" x="-121" y="-1478"/>
         </scene>
     </scenes>
 </document>
