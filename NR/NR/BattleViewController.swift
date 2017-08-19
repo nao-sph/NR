@@ -54,6 +54,8 @@ class BattleViewController : SelectViewController {
         //socket受信した時の処理
         socket.on("to_room_without_self") { data, ack in
             
+            print(data)
+            
 //            let _data: NSDictionary = data[0] as! NSDictionary
 //            var str : NSString = _data[@"Key1"]
             let Cmd: Int = data[0] as! Int
