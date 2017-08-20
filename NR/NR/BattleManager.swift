@@ -66,6 +66,9 @@ class BattleManager {
         if(myCmd == 0 || myCmd == 4) {
             return 2
         }
+        if(yourCmd == 0 || yourCmd == 4) {
+            return 1
+        }
         return (myCmd - yourCmd + 3) % 3
     }
     
