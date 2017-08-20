@@ -108,6 +108,7 @@ class BattleViewController : SelectViewController {
         socket.on("turn_start"){data, ack in
             //startしてからの処理
             print(data[0],"turn目、startしました")
+            self.buttonEnable()
             
             self.socket.on("to_room_without_self") { data, ack in
                 
@@ -121,7 +122,6 @@ class BattleViewController : SelectViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 7){
                 
                 print("7秒経ちました")
-                self.buttonEnable()
                 
                 let a = BattleManager().getResult(myCmd: self.myCmd,yourCmd: yourCmd)
                 print("aite" , yourCmd)
