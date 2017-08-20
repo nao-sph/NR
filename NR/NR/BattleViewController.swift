@@ -153,7 +153,7 @@ class BattleViewController : SelectViewController {
         let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
         socket = appDelegate.socket
         //buttons Disable until enemy selects cmd
-        buttonDisable()
+        //buttonDisable()
         BUTTON.showsTouchWhenHighlighted = true
     }
     // "@{@\"Key1\": @\"Value1\", @\"Key2\": @\"2\", @\"Key3\": @{@\"valueinkey1\": @\"value\", @\"valueinkey2\": @\"3\"}};"
