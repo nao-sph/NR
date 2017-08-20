@@ -35,7 +35,7 @@ class BattleViewController : SelectViewController {
     @IBAction func MPdamageForLocal(decrease: Float){
         MP1.setProgress(MP1.progress - decrease, animated: true)
     }
-
+    
     
     
     override func viewDidLoad() {
@@ -54,66 +54,75 @@ class BattleViewController : SelectViewController {
         //socket受信した時の処理
         socket.on("to_room_without_self") { data, ack in
             
-            print(data)
+            print("aite" , data[0])
+            print("jibun", self.myCmd)
             
-//            let _data: NSDictionary = data[0] as! NSDictionary
-//            var str : NSString = _data[@"Key1"]
+            //            let _data: NSDictionary = data[0] as! NSDictionary
+            //            var str : NSString = _data[@"Key1"]
             let Cmd: Int = data[0] as! Int
             
             
-//            let Num: Data = items.data(using: String.Encoding.utf8)!
+            //            let Num: Data = items.data(using: String.Encoding.utf8)!
             
-//            do {
-//                let json = try JSONSerialization.jsonObject(with: items, options: JSONSerialization.ReadingOptions.allowFragments) // JSONパース。optionsは型推論可(".allowFragmets"等)
-//                let top = json as! NSArray // トップレベルが配列
-//                for roop in top {
-//                    let next = roop as! NSDictionary
-//                    //print(next["id"] as! String) // 1, 2 が表示
-//
-//                    let content = next["content"] as! NSDictionary
-//                    print(content["data"] as! Int) // 25, 20 が表示
-//                }
-//            } catch {
-//                print(error) // パースに失敗したときにエラーを表示
-//            }
+            //            do {
+            //                let json = try JSONSerialization.jsonObject(with: items, options: JSONSerialization.ReadingOptions.allowFragments) // JSONパース。optionsは型推論可(".allowFragmets"等)
+            //                let top = json as! NSArray // トップレベルが配列
+            //                for roop in top {
+            //                    let next = roop as! NSDictionary
+            //                    //print(next["id"] as! String) // 1, 2 が表示
+            //
+            //                    let content = next["content"] as! NSDictionary
+            //                    print(content["data"] as! Int) // 25, 20 が表示
+            //                }
+            //            } catch {
+            //                print(error) // パースに失敗したときにエラーを表示
+            //            }
             
-//            if let Cmd = data as? [[String: AnyObject]]{
-//                if let txt = Cmd[0] as? String {
-//                    print(txt)
-//                    print("test")
-//                }
-//            }
+            //            if let Cmd = data as? [[String: AnyObject]]{
+            //                if let txt = Cmd[0] as? String {
+            //                    print(txt)
+            //                    print("test")
+            //                }
+            //            }
             
-            switch Cmd {
-            case 1:
-                print("attackkkkkkkkkkkkkkkkkkkkk")
-                self.Damage(decrease: 0.25)
-                break
-            case 2:
-                print("magiiiiiiiicccccccccccccccc")
-                self.Damage(decrease: 0.35)
-                self.MPdamage(decrease: 0.2)
-                break
-            case 3:
-                print("barrrrrrrrrrrrrrrrrrrrierrrr")
-//                self.Damage(decrease: 0.1)
-                 self.Damage(decrease: -1)
-                break
-            case 4:
-                print("chaaaaaaaaaarrrrrrrgeeeeeeee")
-                self.MPdamage(decrease: -0.25)
-                self.cure(increase: 0.2)
-                break
-            default:
-                print("nothinggggggggggggggggggggg")
+            let yourCmd: Int = data[0] as! Int
+            let a = BattleManager().getResult(myCmd: self.myCmd,yourCmd: yourCmd)
+            print("kekka",a)
+            if(a == 0 || a == 2){
+                switch Cmd {
+                case 1:
+                    print("attackkkkkkkkkkkkkkkkkkkkk")
+                    self.Damage(decrease: 0.25)
+                    break
+                case 2:
+                    print("magiiiiiiiicccccccccccccccc")
+                    self.Damage(decrease: 0.35)
+                    self.MPdamage(decrease: 0.2)
+                    break
+                case 3:
+                    print("barrrrrrrrrrrrrrrrrrrrierrrr")
+                    //                self.Damage(decrease: 0.1)
+                    self.Damage(decrease: -1)
+                    break
+                case 4:
+                    print("chaaaaaaaaaarrrrrrrgeeeeeeee")
+                    self.MPdamage(decrease: -0.25)
+                    self.cure(increase: 0.2)
+                    break
+                default:
+                    print("nothinggggggggggggggggggggg")
+                }
+                self.buttonEnable()
+                
             }
+            
             self.buttonEnable()
             
         }
-//        socket.on("to_self") { data, ack in
-//            print("magiccccccccccccccccccc")
-//            self.buttonEnable()
-//        }
+        //        socket.on("to_self") { data, ack in
+        //            print("magiccccccccccccccccccc")
+        //            self.buttonEnable()
+        //        }
         
         //体力バー
         
@@ -157,12 +166,15 @@ class BattleViewController : SelectViewController {
         BUTTON.showsTouchWhenHighlighted = true
     }
     // "@{@\"Key1\": @\"Value1\", @\"Key2\": @\"2\", @\"Key3\": @{@\"valueinkey1\": @\"value\", @\"valueinkey2\": @\"3\"}};"
-
+    
+    var myCmd = 0;
+    
     
     @IBAction func attack(_ sender: UIButton) {
         buttonBasics(BUTTON: sender)
         socket.emit("req_to_room_without_self",1)
         Damage2p(decrease: 0.25)
+        myCmd = 1
         
     }
     @IBAction func magic(_ sender: UIButton) {
@@ -170,12 +182,14 @@ class BattleViewController : SelectViewController {
         socket.emit("req_to_room_without_self",2)
         Damage2p(decrease: 0.35)
         MPdamageForLocal(decrease: 0.2)
+        myCmd = 2
         
     }
     @IBAction func barrier(_ sender: UIButton) {
         buttonBasics(BUTTON: sender)
         socket.emit("req_to_room_without_self",3)
         cure(increase: 1)
+        myCmd = 3
     }
     
     @IBAction func charge(_ sender: UIButton) {
@@ -183,6 +197,7 @@ class BattleViewController : SelectViewController {
         socket.emit("req_to_room_without_self",4)
         self.MPdamageForLocal(decrease: -0.25)
         self.Damage(decrease: -0.2)
+        myCmd = 4
         
     }
     
