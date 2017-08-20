@@ -114,6 +114,7 @@ class BattleViewController : SelectViewController {
                 yourCmd = data[0] as! Int
                 
             }
+            self.buttonDisable()
             
             //ここまでがstartしてすぐに行う処理
             
@@ -121,6 +122,7 @@ class BattleViewController : SelectViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + 7){
                 
                 print("7秒経ちました")
+                self.buttonEnable()
                 
                 let a = BattleManager().getResult(myCmd: self.myCmd,yourCmd: yourCmd)
                 print("aite" , yourCmd)
