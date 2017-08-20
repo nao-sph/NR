@@ -66,7 +66,7 @@ class BattleManager {
         if(myCmd == 0 || myCmd == 4) {
             return 2
         }
-        return (myCmd - yourCmd) % 3
+        return (myCmd - yourCmd + 3) % 3
     }
     
     func goResult (myHP: Float, yourHP: Float) {
